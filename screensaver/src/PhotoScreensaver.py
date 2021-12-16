@@ -60,9 +60,6 @@ class PhotoScreensaver(Screen):
 		self.onClose.append(self._onClose)
 		config.plugins.screensaver.photo.speed.addNotifier(self._setupAnimation, initial_call = False)
 
-		if not config.plugins.screensaver.verifySSL.value:
-			requests.packages.urllib3.disable_warnings()
-
 	def _onShow(self):#
 		self._immediateShow = self._isInitial
 		if not self._immediateShow:
@@ -125,9 +122,9 @@ class PhotoScreensaver(Screen):
 
 	def _loadNext(self):
 		Log.i("Getting next photo")
-		url = "https://source.unsplash.com/random/1920x1080"
+		url = "https://source.unsplash.com/random/1920x1080/?nature"
 		try:
-			response = requests.get(url, verify=config.plugins.screensaver.verifySSL.value)
+			response = requests.get(url, verify="/etc/ssl/certs/ca-certificates.crt")
 			if response.status_code == 200:
 				open(self.TEMPFILE, 'wb').write(response.content)
 				self._onFileReady()

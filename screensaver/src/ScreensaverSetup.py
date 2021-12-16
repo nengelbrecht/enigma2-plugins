@@ -31,7 +31,6 @@ class ScreensaverSetup(Screen, ConfigListScreen):
 		]
 		if cfg.enabled.value:
 			lst.append(getConfigListEntry(_("Seconds before activation"), cfg.delay))
-			lst.append(getConfigListEntry(_("Verify ssl-certificate"), cfg.verifySSL))
 		lst.extend([
 			getConfigListEntry(_("Seconds between images"), cfg.photo.retention),
 			getConfigListEntry(_("Cross fade duration (seconds)"), cfg.photo.speed)
